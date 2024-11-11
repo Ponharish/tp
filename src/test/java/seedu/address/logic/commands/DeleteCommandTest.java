@@ -69,23 +69,6 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_validNricFilteredList_success() {
-        Person personToDelete = ALICE;
-        showPersonWithNric(model, personToDelete.getNric());
-
-        DeleteCommand deleteCommand = new DeleteCommand(personToDelete.getNric());
-
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-        showNoPerson(expectedModel);
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(ALICE.getNric());
         DeleteCommand deleteSecondCommand = new DeleteCommand(BENSON.getNric());

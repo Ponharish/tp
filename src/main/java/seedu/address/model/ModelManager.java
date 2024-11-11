@@ -116,7 +116,7 @@ public class ModelManager implements Model {
         for (Nric caregivernric : target.getCaregivers()) {
             addressBook.deleteLink(target, addressBook.getPerson(caregivernric));
         }
-
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -188,6 +188,7 @@ public class ModelManager implements Model {
     @Override
     public void removeAppointment(Appointment appointment, Person person) {
         appointmentManager.removeAppointment(appointment, person);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     /**
@@ -232,10 +233,19 @@ public class ModelManager implements Model {
     @Override
     public void updateAppointmentStatus(Appointment appointment, Status status) {
         appointmentManager.updateAppointmentStatus(appointment, status);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+
+    /**
+     * Adds a note to a specific person in the address book.
+     *
+     * @param note The note to be added to the person.
+     * @param person The person to whom the note is added.
+     */
     public void addNoteToPerson(Note note, Person person) {
         addressBook.addNoteToPerson(note, person);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     //=========== Filtered Person List Accessors =============================================================

@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -103,6 +104,7 @@ public class AddAppointmentCommand extends Command {
 
         boolean success = model.addAppointment(appointmentToAdd, person);
         if (success) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(String.format(MESSAGE_SUCCESS, appointmentToAdd));
         } else {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
